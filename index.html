@@ -26,9 +26,9 @@
                             <div class="card-header p-2 border-0 d-flex justify-content-between align-items-center back-ground_pink">
 
                                 <!-- profilo utente -->
-                                <div class="d-flex align-items-center">
+                                <div class="user-profile d-flex align-items-center">
                                     <div class="profile-img">
-                                        <img src="./img/avatar_1.jpg" alt="Prova">
+                                        <img src="./img/avatar_io.jpg" alt="Prova">
                                     </div>
                                     <div>Sofia</div>
                                 </div>
@@ -70,16 +70,16 @@
                                 </div>
 
                                 <!-- profili con cui ciattare -->
-                                <div class="overflow-auto">
+                                <div class="chat-profiles overflow-auto">
 
                                     <!-- shede di profili della chat -->
                                     <div v-for="value in contacts" class="profile px-4 py-3 d-flex justify-content-between">
                                         <div class="d-flex">
                                             <div class="profile-img">
-                                                <img src="./img/avatar_1.jpg" alt="Prova">
+                                                <img :src="`./img/avatar${value.avatar}.jpg`" alt="Prova">
                                             </div>
                                             <div class="ms-4">
-                                                <div class="fs-5">Sofia</div>
+                                                <div class="fs-5">{{value.name}}</div>
                                                 <div class="notify-warning font-size-xs color-lightgrey">Ultimo messaggio inviato</div>
                                             </div>
                                         </div>
@@ -100,12 +100,12 @@
                             <div class="card-header d-flex align-items-center justify-content-between p-2 border-0 back-ground_pink">
 
                                 <!-- profilo della chat attiva -->
-                                <div class="d-flex align-items-center">
+                                <div class="profile-active d-flex align-items-center">
                                     <div class="profile-img">
                                         <img src="./img/avatar_1.jpg" alt="Prova">
                                     </div>
-                                    <div>
-                                        <div>Sofia</div>
+                                    <div class="ms-3">
+                                        <div>Michele</div>
                                         <div class="notify-warning font-size-xs color-grey">Ultimo accesso oggi alle 12:00</div>
                                     </div>
                                 </div>
@@ -124,14 +124,22 @@
                                 </div>
                             </div>
 
-                            <!-- corpo della pagina -->
-                            <div class="card-body border-0 overflow-auto">
+                            <!-- corpo della pagina schermata della chat -->
+                            <div class="card-body chat-scroll border-0 overflow-auto">
                                 gggggggggggg
                             </div>
 
                             <!-- fondo della pagina -->
-                            <div class="card-footer border-0 back-ground_pink">
-                                gdsfdbdb
+                            <div class="card-footer w-100 px-4 d-flex align-items-center border-0 back-ground_pink">
+                                <div class="emoji fs-4">
+                                    <i class="fa-regular fa-face-smile"></i>
+                                </div>
+                                <div class="message-bar mx-4">
+                                    <input type="text" class="input-message py-2 px-3 w-100" placeholder="Scrivi un messaggio">
+                                </div>
+                                <div class="microphone fs-4">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
