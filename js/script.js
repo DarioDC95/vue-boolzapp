@@ -194,7 +194,6 @@ createApp({
         },
         insertMessageInChat() {
             let messageReceivedSent = "";
-            let messageSent = "";
             for (let i = 0; i < this.contacts.length; i++) {
                 if (this.contacts[i].visible == true) {
                     const contactsMessages = this.contacts[i].messages;
