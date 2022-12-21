@@ -19,6 +19,10 @@ main {
     background-color: #8edafc;
 }
 
+.back-ground_lightgreen {
+    background-color: #d5f9ba;
+}
+
 .color-lightgrey {
     color: #b1b1b1;
 }
@@ -35,8 +39,12 @@ main {
     color: #8edafc;
 }
 
-.font-size-xs {
+.font-size-sm {
     font-size: 13px;
+}
+
+.font-size-xs {
+    font-size: 11px;
 }
 
 .profile-img {
@@ -103,6 +111,13 @@ main {
 .chat-scroll {
     background-image: url('../img/mine.jpg');
     padding: 50px 100px;
+}
+
+.message-text {
+    width: 300px;
+    word-wrap: break-word;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 /* fondo della pagina */

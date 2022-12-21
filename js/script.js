@@ -192,5 +192,30 @@ createApp({
                 }
             }
         },
+        insertMessageInChat() {
+            let messageReceivedSent = "";
+            let messageSent = "";
+            for (let i = 0; i < this.contacts.length; i++) {
+                if (this.contacts[i].visible == true) {
+                    const contactsMessages = this.contacts[i].messages;
+                    for (let j = 0; j < contactsMessages.length; j++) {
+                        if (contactsMessages[j].status === 'received') {
+                            messageReceivedSent += `<div class="message-text bg-white d-flex flex-column align-self-start">
+                                                        <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
+                                                        <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date.split(' ')[1]}</div>
+                                                    </div>`
+                        }
+                        else if (contactsMessages[j].status === 'sent') {
+                            messageReceivedSent += `<div class="message-text back-ground_lightgreen d-flex flex-column align-self-end">
+                                                        <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
+                                                        <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date.split(' ')[1]}</div>
+                                                    </div>`
+                        }
+                    }
+                }
+            }
+            console.log(messageReceivedSent);
+            return messageReceivedSent;
+        }
     },
 }).mount('#app')

@@ -80,7 +80,7 @@
                                             </div>
                                             <div class="ms-4">
                                                 <div class="fs-5">{{value.name}}</div>
-                                                <div class="notify-warning font-size-xs color-lightgrey">Ultimo messaggio inviato</div>
+                                                <div class="notify-warning font-size-sm color-lightgrey">Ultimo messaggio inviato</div>
                                             </div>
                                         </div>
                                         <div class="date font-size-xs color-lightgrey">
@@ -117,21 +117,17 @@
                             </div>
 
                             <!-- corpo della pagina schermata della chat -->
-                            <div class="card-body d-flex flex-column chat-scroll border-0 overflow-auto">
-                                <div class="">
-
-                                </div>
-                            </div>
+                            <div class="card-body d-flex flex-column chat-scroll border-0 overflow-auto" v-html="insertMessageInChat()"></div>
 
                             <!-- fondo della pagina -->
                             <div class="card-footer w-100 px-4 d-flex align-items-center border-0 back-ground_pink">
-                                <div class="emoji fs-4">
+                                <div class="emoji color-grey fs-4">
                                     <i class="fa-regular fa-face-smile"></i>
                                 </div>
                                 <div class="message-bar mx-4">
                                     <input type="text" class="input-message py-2 px-3 w-100" placeholder="Scrivi un messaggio">
                                 </div>
-                                <div class="microphone fs-4">
+                                <div class="microphone color-grey fs-4">
                                     <i class="fa-solid fa-microphone"></i>
                                 </div>
                             </div>
