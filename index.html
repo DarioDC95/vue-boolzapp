@@ -15,11 +15,11 @@
 <body>
     <div id="app">
         <main>
-            <div class="container">
-                <div class="row g-0">
+            <div class="container h-100">
+                <div class="row h-100 g-0">
 
                     <!-- colonna profili con cui chattare -->
-                    <div class="col-4 bg-white border">
+                    <div class="col-4 h-100 bg-white border">
                         <div class="card h-100 border-0 rounded-0">
 
                             <!-- testa della colonna -->
@@ -48,7 +48,7 @@
                             </div>
 
                             <!-- corpo della colonna profili e barra di ricerca -->
-                            <div class="card-body p-0 border-0">
+                            <div class="card-body chat p-0 border-0 d-flex flex-column overflow-auto">
 
                                 <!-- ricevi notifiche -->
                                 <div class="px-4 py-3 d-flex align-items-center back-ground_lightblue">
@@ -65,7 +65,27 @@
                                 <div class="search-bar p-2">
                                     <div class="input-search-group d-flex align-items-center">
                                         <span class="search-simbol py-2 ps-4 pe-1 color-lightgrey"><i class="fa-solid fa-magnifying-glass"></i></span>
-                                        <input type="search" class="input-search py-1 pe-1 w-100" placeholder="Prova a cercare: Lezioni di Laravel">
+                                        <input type="search" class="input-search py-1 pe-1 w-100" placeholder="Cerca o inizia una nuova chat">
+                                    </div>
+                                </div>
+
+                                <!-- profili con cui ciattare -->
+                                <div class="overflow-auto">
+
+                                    <!-- shede di profili della chat -->
+                                    <div v-for="value in contacts" class="profile px-4 py-3 d-flex justify-content-between">
+                                        <div class="d-flex">
+                                            <div class="profile-img">
+                                                <img src="./img/avatar_1.jpg" alt="Prova">
+                                            </div>
+                                            <div class="ms-4">
+                                                <div class="fs-5">Sofia</div>
+                                                <div class="notify-warning font-size-xs color-lightgrey">Ultimo messaggio inviato</div>
+                                            </div>
+                                        </div>
+                                        <div class="date font-size-xs color-lightgrey">
+                                            12:00
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -73,14 +93,14 @@
                     </div>
 
                     <!-- colonna chat -->
-                    <div class="col-8 border">
+                    <div class="col-8 h-100 border">
                         <div class="card h-100 border-0 rounded-0">
 
                             <!-- testa della colonna -->
                             <div class="card-header d-flex align-items-center justify-content-between p-2 border-0 back-ground_pink">
 
                                 <!-- profilo della chat attiva -->
-                                <div class="profile d-flex align-items-center">
+                                <div class="d-flex align-items-center">
                                     <div class="profile-img">
                                         <img src="./img/avatar_1.jpg" alt="Prova">
                                     </div>
@@ -103,11 +123,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body border-0">
-                                dfbtb
+
+                            <!-- corpo della pagina -->
+                            <div class="card-body border-0 overflow-auto">
+                                gggggggggggg
                             </div>
+
+                            <!-- fondo della pagina -->
                             <div class="card-footer border-0 back-ground_pink">
-                                ddfff
+                                gdsfdbdb
                             </div>
                         </div>
                     </div>

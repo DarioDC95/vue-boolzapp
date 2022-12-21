@@ -46,6 +46,11 @@ main {
     overflow: hidden;
 }
 
+.chat-profiles .profile-img {
+    width: 60px;
+    height: 60px;
+}
+
 .profile-img img {
     height: 100%;
 }
