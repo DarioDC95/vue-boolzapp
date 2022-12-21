@@ -3,3 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+main {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to top, #dde8e8 , #DDDBD1 75%, #009688 75%);
+    padding: 20px 0;
+}
