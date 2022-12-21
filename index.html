@@ -73,10 +73,10 @@
                                 <div class="chat-profiles overflow-auto">
 
                                     <!-- shede di profili della chat -->
-                                    <div v-for="value in contacts" class="profile px-4 py-3 d-flex justify-content-between">
+                                    <div v-for="(value, index) in contacts" @click="chosenProfile(index)" class="profile border-top px-4 py-3 d-flex justify-content-between">
                                         <div class="d-flex">
                                             <div class="profile-img">
-                                                <img :src="`./img/avatar${value.avatar}.jpg`" alt="Prova">
+                                                <img :src="`./img/avatar${value.avatar}.jpg`" :alt="value.name">
                                             </div>
                                             <div class="ms-4">
                                                 <div class="fs-5">{{value.name}}</div>
@@ -100,15 +100,7 @@
                             <div class="card-header d-flex align-items-center justify-content-between p-2 border-0 back-ground_pink">
 
                                 <!-- profilo della chat attiva -->
-                                <div class="profile-active d-flex align-items-center">
-                                    <div class="profile-img">
-                                        <img src="./img/avatar_1.jpg" alt="Prova">
-                                    </div>
-                                    <div class="ms-3">
-                                        <div>Michele</div>
-                                        <div class="notify-warning font-size-xs color-grey">Ultimo accesso oggi alle 12:00</div>
-                                    </div>
-                                </div>
+                                <div class="profile-active d-flex align-items-center" v-html="activeProfile()"></div>
 
                                 <!-- opzioni icone -->
                                 <div class="d-flex fs-4 color-lightgrey">
@@ -125,8 +117,10 @@
                             </div>
 
                             <!-- corpo della pagina schermata della chat -->
-                            <div class="card-body chat-scroll border-0 overflow-auto">
-                                gggggggggggg
+                            <div class="card-body d-flex flex-column chat-scroll border-0 overflow-auto">
+                                <div class="">
+
+                                </div>
                             </div>
 
                             <!-- fondo della pagina -->
