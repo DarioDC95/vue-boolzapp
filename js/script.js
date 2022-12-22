@@ -3,6 +3,9 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
+            search: '',
+            messageEnter: '',
+            profileActive: 0,
             contacts: [
                 {
                 name: 'Michele',
@@ -29,7 +32,7 @@ createApp({
                 {
                 name: 'Fabio',
                 avatar: '_2',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '20/03/2020 16:30:00',
@@ -51,7 +54,7 @@ createApp({
                 {
                 name: 'Samuele',
                 avatar: '_3',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '28/03/2020 10:10:40',
@@ -73,7 +76,7 @@ createApp({
                 {
                 name: 'Alessandro B.',
                 avatar: '_4',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -90,7 +93,7 @@ createApp({
                 {
                 name: 'Alessandro L.',
                 avatar: '_5',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -107,7 +110,7 @@ createApp({
                 {
                 name: 'Claudia',
                 avatar: '_6',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -129,7 +132,7 @@ createApp({
                 {
                 name: 'Federico',
                 avatar: '_7',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -146,7 +149,7 @@ createApp({
                 {
                 name: 'Davide',
                 avatar: '_8',
-                visible: false,
+                visible: true,
                 messages: [
                         {
                         date: '10/01/2020 15:30:55',
@@ -162,59 +165,55 @@ createApp({
                         date: '10/01/2020 15:51:00',
                         message: 'OK!!',
                         status: 'received'
-                        }
+                        },
                     ],
                 }
             ]    
         }
     },
     methods: {
+        filterdContacts() {
+
+        },
         chosenProfile(index) {
-            for (let i = 0; i < this.contacts.length; i++) {
-                if (i === index) {
-                    this.contacts[i].visible = true;
-                }
-                else {
-                    this.contacts[i].visible = false;
-                }
-            }
+            this.profileActive = index;
         },
-        activeProfile() {
-            for (let i = 0; i < this.contacts.length; i++) {
-                if (this.contacts[i].visible) {
-                    return `<div class="profile-img">
-                                <img src="./img/avatar${this.contacts[i].avatar}.jpg" alt="${this.contacts[i].name}">
-                            </div>
-                            <div class="ms-4">
-                                <div class="fs-5">${this.contacts[i].name}</div>
-                                <div class="notify-warning font-size-xs color-lightgrey">Ultimo accesso oggi alle 12:00</div>
-                            </div>`
-                }
+        // PRIMA AVEVO INSERITO LE CHAT TRAMITE V-HTML
+        // insertMessageInChat() {
+        //     let messageReceivedSent = "";
+        //     for (let i = 0; i < this.contacts.length; i++) {
+        //         if (i === this.profileActive) {
+        //             const contactsMessages = this.contacts[i].messages;
+        //             for (let j = 0; j < contactsMessages.length; j++) {
+        //                 if (contactsMessages[j].status === 'received') {
+        //                     messageReceivedSent += `<div class="message-text bg-white d-flex flex-column align-self-start">
+        //                                                 <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
+        //                                                 <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date}</div>
+        //                                             </div>`
+        //                 }
+        //                 else if (contactsMessages[j].status === 'sent') {
+        //                     messageReceivedSent += `<div class="message-text back-ground_lightgreen d-flex flex-column align-self-end">
+        //                                                 <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
+        //                                                 <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date}</div>
+        //                                             </div>`
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return messageReceivedSent;
+        // },
+        enterMessage() {
+            if (this.messageEnter != '') {
+                const presentDay = new Date;
+                const presentDayOK = presentDay.getDate() + '/' + (presentDay.getMonth() + 1) + '/' + presentDay.getFullYear() + ' ' + ((presentDay[Symbol.toPrimitive]("string")).split(" ")[4]);
+                let newMessage = {
+                                     date: presentDayOK,
+                                     message: this.messageEnter,
+                                     status: 'Sent'
+                                 };
+                this.contacts[this.profileActive].messages.push(newMessage);
+                this.messageEnter = '';
             }
-        },
-        insertMessageInChat() {
-            let messageReceivedSent = "";
-            for (let i = 0; i < this.contacts.length; i++) {
-                if (this.contacts[i].visible == true) {
-                    const contactsMessages = this.contacts[i].messages;
-                    for (let j = 0; j < contactsMessages.length; j++) {
-                        if (contactsMessages[j].status === 'received') {
-                            messageReceivedSent += `<div class="message-text bg-white d-flex flex-column align-self-start">
-                                                        <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
-                                                        <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date.split(' ')[1]}</div>
-                                                    </div>`
-                        }
-                        else if (contactsMessages[j].status === 'sent') {
-                            messageReceivedSent += `<div class="message-text back-ground_lightgreen d-flex flex-column align-self-end">
-                                                        <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
-                                                        <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date.split(' ')[1]}</div>
-                                                    </div>`
-                        }
-                    }
-                }
-            }
-            console.log(messageReceivedSent);
-            return messageReceivedSent;
         }
     },
 }).mount('#app')
