@@ -167,13 +167,21 @@ createApp({
                         status: 'received'
                         },
                     ],
-                }
+                },
             ]    
         }
     },
     methods: {
         filterdContacts() {
-
+            let searchProfile = this.search.toLowerCase()
+            for (let i = 0; i < this.contacts.length; i++) {
+                if (this.contacts[i].name.toLowerCase().includes(searchProfile)) {
+                    this.contacts[i].visible = true;
+                }
+                else if (!(this.contacts[i].name.toLowerCase().includes(searchProfile))) {
+                    this.contacts[i].visible = false;
+                }
+            }
         },
         chosenProfile(index) {
             this.profileActive = index;
@@ -213,7 +221,31 @@ createApp({
                                  };
                 this.contacts[this.profileActive].messages.push(newMessage);
                 this.messageEnter = '';
+
+                setTimeout(() => {
+                    let newAnswer = {
+                                        date: presentDayOK,
+                                        message: 'Sono un Jedi, se credi nella giustizia aiutami a sconfiggere Dark Wader.',
+                                        status: 'received'
+                                    }
+                    this.contacts[this.profileActive].messages.push(newAnswer);
+                }, 1000)
             }
+        },
+        shortMessage(index) {
+            let lastMessage = this.contacts[index].messages[this.contacts[index].messages.length - 1].message;
+            if (lastMessage.length > 25) {
+                lastMessage = lastMessage.substring(0, 26) + '...';
+            }
+            return lastMessage
+        },
+        shortTime(date) {
+            const dayTime = date.split(' ')[1];
+            const dayTimeOK = dayTime.substring(0, 5);
+            return dayTimeOK
+        },
+        lastAccess() {
+
         }
     },
 }).mount('#app')
