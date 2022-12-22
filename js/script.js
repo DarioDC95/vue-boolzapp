@@ -244,8 +244,5 @@ createApp({
             const dayTimeOK = dayTime.substring(0, 5);
             return dayTimeOK
         },
-        lastAccess() {
-
-        }
     },
 }).mount('#app')
