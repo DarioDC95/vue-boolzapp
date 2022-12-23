@@ -3,9 +3,16 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
+            // barra di ricerca
             search: '',
+
+            // scrivo messaggio
             messageEnter: '',
+
+            // setto il profilo attivo
             profileActive: 0,
+
+            // array di contatti
             contacts: [
                 {
                 name: 'Michele',
@@ -172,6 +179,7 @@ createApp({
         }
     },
     methods: {
+        // funzione di ricerca profili
         filterdContacts() {
             let searchProfile = this.search.toLowerCase()
             for (let i = 0; i < this.contacts.length; i++) {
@@ -183,6 +191,8 @@ createApp({
                 }
             }
         },
+
+        // definisco profileActive
         chosenProfile(index) {
             this.profileActive = index;
         },
@@ -210,6 +220,8 @@ createApp({
         //     }
         //     return messageReceivedSent;
         // },
+
+        // funzione per scrivere il messaggio e risposta
         enterMessage() {
             if (this.messageEnter != '') {
                 const presentDay = new Date;
@@ -232,6 +244,8 @@ createApp({
                 }, 1000)
             }
         },
+
+        // abbrevio ultimo messaggio inviato/ricevuto
         shortMessage(index) {
             let lastMessage = this.contacts[index].messages[this.contacts[index].messages.length - 1].message;
             if (lastMessage.length > 25) {
@@ -239,11 +253,41 @@ createApp({
             }
             return lastMessage
         },
+
+        // abbrevio il tempo in ore e minuti
         shortTime(date) {
             const dayTime = date.split(' ')[1];
             const [hours, minutes, seconds] = dayTime.split(':');
             const dayTimeOK = hours + ':' + minutes;
             return dayTimeOK
         },
+
+        // BONUS
+        // drop-down_chat dei messaggi
+        showDropdownChat(index) {
+            let classActive = `.active-${index}`;
+            let activeDropdown = document.querySelector(classActive);
+            console.log(activeDropdown)
+            if (activeDropdown != null) {
+                activeDropdown.classList.toggle('show_drop-down');
+            }
+        },
+
+        // cancellare il messaggio
+        eraseMessage(index) {
+            const presentDay = new Date;
+            const presentDayOK = presentDay.getDate() + '/' + (presentDay.getMonth() + 1) + '/' + presentDay.getFullYear() + ' ' + ((presentDay[Symbol.toPrimitive]("string")).split(" ")[4]);
+            let ReplaceMessage = {
+                                     date: presentDayOK,
+                                     message: "Hai eliminato tutti i messaggi di questo contatto",
+                                     status: 'received'
+                                 };
+            if (this.contacts[this.profileActive].messages.length == 1) {
+                this.contacts[this.profileActive].messages.splice(index, 1, ReplaceMessage)
+            }
+            else {
+                this.contacts[this.profileActive].messages.splice(index, 1)
+            }
+        }
     },
 }).mount('#app')

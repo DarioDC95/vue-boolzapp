@@ -128,9 +128,17 @@
 
                             <!-- corpo della pagina schermata della chat -->
                             <div class="card-body d-flex flex-column chat-scroll border-0 overflow-auto">
-                                <div v-for="(value) in contacts[profileActive].messages" class="message-text d-flex flex-column" :class="value.status === 'received' ? 'bg-white align-self-start' : 'back-ground_lightgreen align-self-end'">
-                                    <div class= "px-3 pt-2 pb-1">{{value.message}}</div>
-                                    <div class="px-1 pb-1 align-self-end font-size-xs">{{shortTime(value.date)}}</div>
+                                <div v-for="(value, index) in contacts[profileActive].messages" @click="showDropdownChat(index)" class="message-container" :class="value.status === 'received' ? 'align-self-start' : 'align-self-end'">
+                                    <div class="message-text d-flex flex-column" :class="value.status === 'received' ? 'bg-white' : 'back-ground_lightgreen'">
+                                        <div class="px-3 pt-2 pb-1">{{value.message}}</div>
+                                        <div class="px-1 pb-1 align-self-end font-size-xs">{{shortTime(value.date)}}</div>
+                                    </div>
+
+                                    <!-- drop-down_chat -->
+                                    <div class="drop-down_chat bg-white" :class="`active-${index}`">
+                                        <div @click="eraseMessage(index)" class="erase-message border-bottom h-50 d-flex p-3 align-items-center font-size-sm">Elimina Messaggio</div>
+                                        <div class="info-message h-50 d-flex p-3 align-items-center font-size-sm">Info Messaggio</div>
+                                    </div>
                                 </div>
                             </div>
 
