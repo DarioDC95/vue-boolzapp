@@ -241,7 +241,8 @@ createApp({
         },
         shortTime(date) {
             const dayTime = date.split(' ')[1];
-            const dayTimeOK = dayTime.substring(0, 5);
+            const [hours, minutes, seconds] = dayTime.split(':');
+            const dayTimeOK = hours + ':' + minutes;
             return dayTimeOK
         },
     },
