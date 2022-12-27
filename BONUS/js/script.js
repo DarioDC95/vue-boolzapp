@@ -196,30 +196,6 @@ createApp({
         chosenProfile(index) {
             this.profileActive = index;
         },
-        // PRIMA AVEVO INSERITO LE CHAT TRAMITE V-HTML
-        // insertMessageInChat() {
-        //     let messageReceivedSent = "";
-        //     for (let i = 0; i < this.contacts.length; i++) {
-        //         if (i === this.profileActive) {
-        //             const contactsMessages = this.contacts[i].messages;
-        //             for (let j = 0; j < contactsMessages.length; j++) {
-        //                 if (contactsMessages[j].status === 'received') {
-        //                     messageReceivedSent += `<div class="message-text bg-white d-flex flex-column align-self-start">
-        //                                                 <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
-        //                                                 <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date}</div>
-        //                                             </div>`
-        //                 }
-        //                 else if (contactsMessages[j].status === 'sent') {
-        //                     messageReceivedSent += `<div class="message-text back-ground_lightgreen d-flex flex-column align-self-end">
-        //                                                 <div class= "px-3 pt-2 pb-1">${contactsMessages[j].message}</div>
-        //                                                 <div class="px-1 pb-1 align-self-end font-size-xs">${contactsMessages[j].date}</div>
-        //                                             </div>`
-        //                 }
-        //             }
-        //         }
-        //     }
-        //     return messageReceivedSent;
-        // },
 
         // funzione per scrivere il messaggio e risposta
         enterMessage() {
@@ -265,14 +241,14 @@ createApp({
         // BONUS
         // drop-down_chat dei messaggi
         showDropdownChat(index) {
-            let classActive = `.active-${index}`;
-            let activeDropdown = document.querySelector(classActive);
+            let idActive = `active-${index}`;
+            let activeDropdown = document.getElementById(idActive);
             console.log(activeDropdown)
             if (activeDropdown != null) {
                 activeDropdown.classList.toggle('show_drop-down');
             }
         },
-
+        
         // cancellare il messaggio
         eraseMessage(index) {
             const presentDay = new Date;
