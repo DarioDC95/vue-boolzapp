@@ -195,6 +195,7 @@ createApp({
         // definisco profileActive
         chosenProfile(index) {
             this.profileActive = index;
+            this.hideShowDownChat()
         },
 
         // funzione per scrivere il messaggio e risposta
@@ -205,10 +206,15 @@ createApp({
                 let newMessage = {
                                      date: presentDayOK,
                                      message: this.messageEnter,
-                                     status: 'Sent'
+                                     status: 'sent'
                                  };
-                this.contacts[this.profileActive].messages.push(newMessage);
-                this.messageEnter = '';
+                if (this.contacts[this.profileActive].messages[0].status === 'default') {
+                    this.contacts[this.profileActive].messages.splice(0, 1, newMessage);
+                }
+                else {
+                    this.contacts[this.profileActive].messages.push(newMessage);
+                    this.messageEnter = '';
+                }
 
                 setTimeout(() => {
                     let newAnswer = {
@@ -239,24 +245,34 @@ createApp({
         },
 
         // BONUS
-        // drop-down_chat dei messaggi
+        // mostro la drop-down_chat dei messaggi
         showDropdownChat(index) {
-            let idActive = `active-${index}`;
-            let activeDropdown = document.getElementById(idActive);
-            console.log(activeDropdown)
-            if (activeDropdown != null) {
-                activeDropdown.classList.toggle('show_drop-down');
+            this.hideShowDownChat()
+            if(this.contacts[this.profileActive].messages[0].status != 'default') {
+                let idActive = `active-${index}`;
+                let activeDropdown = document.getElementById(idActive);
+                console.log(activeDropdown);
+                activeDropdown.classList.add('show_drop-down');
+            }
+        },
+
+        // nascondo la drop-down_chat dei messaggi
+        hideShowDownChat() {
+            let allDropdowns = document.getElementsByClassName('drop-down_chat');
+            for (let i = 0; i < allDropdowns.length; i++) {
+                allDropdowns[i].classList.remove('show_drop-down')
             }
         },
         
         // cancellare il messaggio
         eraseMessage(index) {
+            this.hideShowDownChat()
             const presentDay = new Date;
             const presentDayOK = presentDay.getDate() + '/' + (presentDay.getMonth() + 1) + '/' + presentDay.getFullYear() + ' ' + ((presentDay[Symbol.toPrimitive]("string")).split(" ")[4]);
             let ReplaceMessage = {
                                      date: presentDayOK,
                                      message: "Hai eliminato tutti i messaggi di questo contatto",
-                                     status: 'received'
+                                     status: 'default'
                                  };
             if (this.contacts[this.profileActive].messages.length == 1) {
                 this.contacts[this.profileActive].messages.splice(index, 1, ReplaceMessage)
