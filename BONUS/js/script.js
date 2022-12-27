@@ -178,7 +178,7 @@ createApp({
             profileActive: 0,
 
             // sto scrivendo ?
-            is_writing: false,
+            is_writing: null,
         }
     },
     methods: {
@@ -216,8 +216,9 @@ createApp({
                 }
                 else {
                     this.contacts[this.profileActive].messages.push(newMessage);
-                    this.messageEnter = '';
                 }
+                this.messageEnter = '';
+                this.is_writing = 'scrive';
 
                 setTimeout(() => {
                     let newAnswer = {
@@ -226,7 +227,11 @@ createApp({
                                         status: 'received'
                                     }
                     this.contacts[this.profileActive].messages.push(newAnswer);
-                }, 1000)
+                    this.is_writing = 'online';
+                }, 1000);
+                setTimeout(() => {
+                    this.is_writing = null;
+                }, 3000)
             }
         },
 
@@ -289,20 +294,14 @@ createApp({
         lastAccess() {
             let accessTime = this.shortTime(this.contacts[this.profileActive].messages[this.contacts[this.profileActive].messages.length - 1].date);
             let accessTimeOK = 'Ultimo accesso alle' + ' ' + accessTime;
-            if (this.is_writing === true) {
-                return 'sto scrivendo...'
+            console.log('eccomi')
+            if (this.is_writing === 'scrive') {
+                return 'sto scrivendo...';
+            }
+            else if (this.is_writing === 'online') {
+                return 'Online'
             }
             return accessTimeOK
-        },
-        
-        // faccio comparire la scritta che sta rispondendo
-        iswriting() {
-            this.is_writing = true;
-            console.log('scrive')
-            setTimeout(() => {
-                this.is_writing = false;
-                console.log('ha scritto')
-            }, 1000);
-        },
+        }
     },
 }).mount('#app')
