@@ -3,15 +3,6 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
-            // barra di ricerca
-            search: '',
-
-            // scrivo messaggio
-            messageEnter: '',
-
-            // setto il profilo attivo
-            profileActive: 0,
-
             // array di contatti
             contacts: [
                 {
@@ -175,7 +166,19 @@ createApp({
                         },
                     ],
                 },
-            ]    
+            ],
+
+            // barra di ricerca
+            search: '',
+
+            // scrivo messaggio
+            messageEnter: '',
+   
+            // setto il profilo attivo
+            profileActive: 0,
+
+            // sto scrivendo ?
+            is_writing: false,
         }
     },
     methods: {
@@ -280,6 +283,26 @@ createApp({
             else {
                 this.contacts[this.profileActive].messages.splice(index, 1)
             }
-        }
+        },
+
+        // visualizzo l'ultimo accesso
+        lastAccess() {
+            let accessTime = this.shortTime(this.contacts[this.profileActive].messages[this.contacts[this.profileActive].messages.length - 1].date);
+            let accessTimeOK = 'Ultimo accesso alle' + ' ' + accessTime;
+            if (this.is_writing === true) {
+                return 'sto scrivendo...'
+            }
+            return accessTimeOK
+        },
+        
+        // faccio comparire la scritta che sta rispondendo
+        iswriting() {
+            this.is_writing = true;
+            console.log('scrive')
+            setTimeout(() => {
+                this.is_writing = false;
+                console.log('ha scritto')
+            }, 1000);
+        },
     },
 }).mount('#app')
