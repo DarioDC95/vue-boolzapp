@@ -150,8 +150,13 @@
                                 <div class="message-bar mx-4">
                                     <input v-model="messageEnter" @keyup.enter="enterMessage()" type="text" class="input-message py-2 px-3 w-100" placeholder="Scrivi un messaggio">
                                 </div>
-                                <div class="microphone color-grey fs-4">
-                                    <i class="fa-solid fa-microphone"></i>
+                                <div class="microphone_airplane color-grey fs-4">
+                                    <div v-if="messageEnter === ''">
+                                        <i class="fa-solid fa-microphone"></i>
+                                    </div>
+                                    <div v-else @click="enterMessage()">
+                                        <i class="fa-solid fa-paper-plane"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>

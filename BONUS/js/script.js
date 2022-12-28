@@ -232,21 +232,26 @@ createApp({
                 // imposto il diverso this.lastAccess()
                 this.is_writing = 'scrive';
 
-                // definisco la risposta
+                // definisco la risposta casuale dopo un secondo
                 setTimeout(() => {
-                    let casualindex = Math.floor(Math.random() * (this.casualAnswers.length - 1) + 1);
+                    let casualindex = Math.floor(Math.random() * (this.casualAnswers.length));
                     let newAnswer = {
                                         date: presentDayOK,
                                         message: this.casualAnswers[casualindex],
                                         status: 'received'
                                     }
                     this.contacts[this.profileActive].messages.push(newAnswer);
+
+                    // scrolla all'ultimo messaggio sempre
                     this.$nextTick(() => {
                         this.scrollToEnd()
                     })
+
+                    // reimposto il diverso this.lastAccess()
                     this.is_writing = 'online';
                 }, 1000);
 
+                // riporto lo stato all'ultimo accesso di this.lastAccess(), dopo due secondi dalla risposta
                 setTimeout(() => {
                     this.is_writing = null;
                 }, 3000)
