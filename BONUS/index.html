@@ -120,8 +120,16 @@
                                     <div class="paperclip me-3">
                                         <i class="fa-solid fa-paperclip"></i>
                                     </div>
-                                    <div class="dots me-3">
-                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                    <div @click="showDropdownDots()" class="dots px-2 me-3">
+                                        <div>
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </div>
+
+                                        <!-- drop-down dei tre puntini della chat -->
+                                        <div class="drop-down_dots-chat">
+                                            <div @click="eraseAllMessages()" class="erase-message border-bottom h-50 d-flex p-3 align-items-center font-size-sm">Elimina Chat</div>
+                                            <div @click="eraseContact()" class="info-message h-50 d-flex p-3 align-items-center font-size-sm">Elimina Contatto</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

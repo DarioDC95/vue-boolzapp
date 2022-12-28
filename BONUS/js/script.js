@@ -204,13 +204,18 @@ createApp({
             this.hideShowDownChat()
         },
 
+        // definisco l'ora corrente di default come da array
+        DefaultDateTime() {
+            const presentDay = new Date;
+            const presentDayOK = presentDay.getDate() + '/' + (presentDay.getMonth() + 1) + '/' + presentDay.getFullYear() + ' ' + ((presentDay[Symbol.toPrimitive]("string")).split(" ")[4]);
+            return presentDayOK
+        },
+
         // funzione per scrivere il messaggio e risposta
         enterMessage() {
             if (this.messageEnter != '') {
-                const presentDay = new Date;
-                const presentDayOK = presentDay.getDate() + '/' + (presentDay.getMonth() + 1) + '/' + presentDay.getFullYear() + ' ' + ((presentDay[Symbol.toPrimitive]("string")).split(" ")[4]);
                 let newMessage = {
-                                     date: presentDayOK,
+                                     date: this.DefaultDateTime(),
                                      message: this.messageEnter,
                                      status: 'sent'
                                  };
@@ -236,7 +241,7 @@ createApp({
                 setTimeout(() => {
                     let casualindex = Math.floor(Math.random() * (this.casualAnswers.length));
                     let newAnswer = {
-                                        date: presentDayOK,
+                                        date: this.DefaultDateTime(),
                                         message: this.casualAnswers[casualindex],
                                         status: 'received'
                                     }
@@ -287,19 +292,38 @@ createApp({
 
         // nascondo la drop-down_chat dei messaggi
         hideShowDownChat() {
-            let allDropdowns = document.getElementsByClassName('drop-down_chat');
-            for (let i = 0; i < allDropdowns.length; i++) {
-                allDropdowns[i].classList.remove('show_drop-down')
+            let allDropdownsChat = document.getElementsByClassName('drop-down_chat');
+            for (let i = 0; i < allDropdownsChat.length; i++) {
+                allDropdownsChat[i].classList.remove('show_drop-down')
             }
+        },
+
+        // mostro la dropdown dei dots in alto a destra
+        showDropdownDots() {
+            let dropdownDots = document.querySelector('.drop-down_dots-chat')
+            dropdownDots.classList.toggle('show_drop-down')
+        },
+
+        // cancellare il tutto il contatto
+        eraseContact() {
+            this.contacts.splice(this.profileActive, 1)
+        },
+
+        // cancellare tutti i messagi della chat corrente
+        eraseAllMessages() {
+            let ReplaceMessage = {
+                date: this.DefaultDateTime(),
+                message: "Hai eliminato tutti i messaggi di questo contatto",
+                status: 'default'
+            };
+            this.contacts[this.profileActive].messages = []
+            this.contacts[this.profileActive].messages.push(ReplaceMessage)
         },
         
         // cancellare il messaggio
         eraseMessage(index) {
-            this.hideShowDownChat()
-            const presentDay = new Date;
-            const presentDayOK = presentDay.getDate() + '/' + (presentDay.getMonth() + 1) + '/' + presentDay.getFullYear() + ' ' + ((presentDay[Symbol.toPrimitive]("string")).split(" ")[4]);
             let ReplaceMessage = {
-                                     date: presentDayOK,
+                                     date: this.DefaultDateTime(),
                                      message: "Hai eliminato tutti i messaggi di questo contatto",
                                      status: 'default'
                                  };
@@ -309,6 +333,7 @@ createApp({
             else {
                 this.contacts[this.profileActive].messages.splice(index, 1)
             }
+            this.hideShowDownChat()
         },
 
         // visualizzo l'ultimo accesso
