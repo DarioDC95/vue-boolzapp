@@ -179,6 +179,9 @@ createApp({
 
             // sto scrivendo ?
             is_writing: null,
+
+            // messaggi di risposta casuali
+            casualAnswers: ['Sono un Jedi, se credi nella giustizia aiutami a sconfiggere Dark Wader.', 'Ciao, chi vuole giocare ad AmongUs?', 'Sotto la panca la capra crepa, sopra la panca la capra canta', 'Ma sei pazzo?!', 'Whaoo!c, e come è stato?', 'Ho capito', 'Hai mai giocato ai souls? Se non ti piaciono non puoi essere un videogiocatore', 'Lies of P. A lawsuit waiting to happen', 'Silksong where are you? ;('],
         }
     },
     methods: {
@@ -217,18 +220,25 @@ createApp({
                 else {
                     this.contacts[this.profileActive].messages.push(newMessage);
                 }
+                
+                // svuoto l'input dei messaggi
                 this.messageEnter = '';
+
+                // imposto il diverso this.lastAccess()
                 this.is_writing = 'scrive';
 
+                // definisco la risposta
                 setTimeout(() => {
+                    let casualindex = Math.floor(Math.random() * (this.casualAnswers.length - 1) + 1);
                     let newAnswer = {
                                         date: presentDayOK,
-                                        message: 'Sono un Jedi, se credi nella giustizia aiutami a sconfiggere Dark Wader.',
+                                        message: this.casualAnswers[casualindex],
                                         status: 'received'
                                     }
                     this.contacts[this.profileActive].messages.push(newAnswer);
                     this.is_writing = 'online';
                 }, 1000);
+
                 setTimeout(() => {
                     this.is_writing = null;
                 }, 3000)
@@ -255,12 +265,11 @@ createApp({
         // BONUS
         // mostro la drop-down_chat dei messaggi
         showDropdownChat(index) {
-            this.hideShowDownChat()
             if(this.contacts[this.profileActive].messages[0].status != 'default') {
                 let idActive = `active-${index}`;
                 let activeDropdown = document.getElementById(idActive);
                 console.log(activeDropdown);
-                activeDropdown.classList.add('show_drop-down');
+                activeDropdown.classList.toggle('show_drop-down');
             }
         },
 
@@ -294,7 +303,7 @@ createApp({
         lastAccess() {
             let accessTime = this.shortTime(this.contacts[this.profileActive].messages[this.contacts[this.profileActive].messages.length - 1].date);
             let accessTimeOK = 'Ultimo accesso alle' + ' ' + accessTime;
-            console.log('eccomi')
+            
             if (this.is_writing === 'scrive') {
                 return 'sto scrivendo...';
             }
@@ -302,6 +311,13 @@ createApp({
                 return 'Online'
             }
             return accessTimeOK
-        }
+        },
+
+        // scrollo all'ultimo messaggio sempre
+        scrollToEnd() {  
+            let container = document.querySelector(".chat-scroll");
+            container.scrollTop = container.scrollHeight
+            console.log(container)
+        },
     },
 }).mount('#app')
