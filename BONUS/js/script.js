@@ -181,7 +181,7 @@ createApp({
             is_writing: null,
 
             // messaggi di risposta casuali
-            casualAnswers: ['Sono un Jedi, se credi nella giustizia aiutami a sconfiggere Dark Wader.', 'Ciao, chi vuole giocare ad AmongUs?', 'Sotto la panca la capra crepa, sopra la panca la capra canta', 'Ma sei pazzo?!', 'Whaoo!c, e come è stato?', 'Ho capito', 'Hai mai giocato ai souls? Se non ti piaciono non puoi essere un videogiocatore', 'Lies of P. A lawsuit waiting to happen', 'Silksong where are you? ;('],
+            casualAnswers: ['Sono un Jedi, se credi nella giustizia aiutami a sconfiggere Dark Wader.', 'Ciao, chi vuole giocare ad AmongUs?', 'Sotto la panca la capra crepa, sopra la panca la capra canta', 'Ma sei pazzo?!', 'Whaoo!!!, e come è stato?', 'Ho capito', 'Hai mai giocato ai souls? Se non ti piaciono non puoi essere un videogiocatore', 'Lies of P. A lawsuit waiting to happen', 'Silksong where are you? ;('],
         }
     },
     methods: {
@@ -220,6 +220,11 @@ createApp({
                 else {
                     this.contacts[this.profileActive].messages.push(newMessage);
                 }
+
+                // scrolla all'ultimo messaggio sempre
+                this.$nextTick(() => {
+                    this.scrollToEnd()
+                })
                 
                 // svuoto l'input dei messaggi
                 this.messageEnter = '';
@@ -236,6 +241,9 @@ createApp({
                                         status: 'received'
                                     }
                     this.contacts[this.profileActive].messages.push(newAnswer);
+                    this.$nextTick(() => {
+                        this.scrollToEnd()
+                    })
                     this.is_writing = 'online';
                 }, 1000);
 
@@ -268,7 +276,6 @@ createApp({
             if(this.contacts[this.profileActive].messages[0].status != 'default') {
                 let idActive = `active-${index}`;
                 let activeDropdown = document.getElementById(idActive);
-                console.log(activeDropdown);
                 activeDropdown.classList.toggle('show_drop-down');
             }
         },
@@ -317,7 +324,6 @@ createApp({
         scrollToEnd() {  
             let container = document.querySelector(".chat-scroll");
             container.scrollTop = container.scrollHeight
-            console.log(container)
         },
     },
 }).mount('#app')
