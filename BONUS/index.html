@@ -159,7 +159,7 @@
                                     <input v-model="messageEnter" @keyup.enter="enterMessage()" type="text" class="input-message py-2 px-3 w-100" placeholder="Scrivi un messaggio">
                                 </div>
                                 <div class="microphone_airplane color-grey fs-4">
-                                    <div v-if="messageEnter === ''">
+                                    <div v-if="messageEnter === '' || messageEnter.replace(/\s/g, '').length === 0">
                                         <i class="fa-solid fa-microphone"></i>
                                     </div>
                                     <div v-else @click="enterMessage()">

@@ -213,7 +213,7 @@ createApp({
 
         // funzione per scrivere il messaggio e risposta
         enterMessage() {
-            if (this.messageEnter != '') {
+            if (this.messageEnter != '' && this.messageEnter.replace(/\s/g, '').length != 0) {
                 let newMessage = {
                                      date: this.DefaultDateTime(),
                                      message: this.messageEnter,
