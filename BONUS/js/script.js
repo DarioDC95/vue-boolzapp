@@ -182,6 +182,9 @@ createApp({
 
             // messaggi di risposta casuali
             casualAnswers: ['Sono un Jedi, se credi nella giustizia aiutami a sconfiggere Dark Wader.', 'Ciao, chi vuole giocare ad AmongUs?', 'Sotto la panca la capra crepa, sopra la panca la capra canta', 'Ma sei pazzo?!', 'Whaoo!!!, e come è stato?', 'Ho capito', 'Hai mai giocato ai souls? Se non ti piaciono non puoi essere un videogiocatore', 'Lies of P. A lawsuit waiting to happen', 'Silksong where are you? ;('],
+
+            // Emoji
+            emoji: [],
         }
     },
     methods: {
@@ -260,6 +263,9 @@ createApp({
                 setTimeout(() => {
                     this.is_writing = null;
                 }, 3000)
+                function onSelectEmoji(emoji) {
+                    console.log(emoji)
+                }
             }
         },
 

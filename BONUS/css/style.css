@@ -122,9 +122,10 @@ main {
 .message-container {
     position: relative;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
-.dots {
+.col-8 .dots-menu {
     position: relative;
     cursor: pointer;
 }
@@ -157,7 +158,6 @@ main {
 }
 
 .erase-message, .info-message {
-    cursor: pointer;
     background-color: #eaeaea;
 }
 
@@ -191,4 +191,9 @@ main {
     width: 30px;
     text-align: center;
     cursor: pointer;
+}
+
+/* effetti di hover sulle icone di tutta la pagina */
+.icons-onhover:hover {
+    color: grey;
 }
