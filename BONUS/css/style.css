@@ -166,11 +166,7 @@ main {
 }
 
 /* fondo della pagina */
-/* barra per inserire i messaggi */
-.message-bar {
-    flex-grow: 1;
-}
-
+/* toggle delle emoji */
 .emoji {
     position: relative;
     cursor: pointer;
@@ -185,6 +181,11 @@ main {
 .pickerContainer.show_drop-down {
     display: block;
     z-index: 10;
+}
+
+/* barra per inserire i messaggi */
+.message-bar {
+    flex-grow: 1;
 }
 
 .input-message {

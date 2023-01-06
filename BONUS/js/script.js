@@ -302,7 +302,7 @@ createApp({
             }
         },
 
-        // mostro la dropdown dei dots in alto a destra
+        // mostro/nascondo la dropdown dei dots in alto a destra
         showDropdownDots() {
             let dropdownDots = document.querySelector('.drop-down_dots-chat')
             dropdownDots.classList.toggle('show_drop-down')
@@ -370,12 +370,12 @@ createApp({
         const container = document.querySelector('.pickerContainer');
 
         const picker = createPicker({
-            rootElement: container
-        })
+            rootElement: container,
+        });
 
         picker.addEventListener('emoji:select', event => {
             console.log('Emoji selected:', event.emoji);
             this.messageEnter += event.emoji
-        });
+        })
     },
 }).mount('#app')
