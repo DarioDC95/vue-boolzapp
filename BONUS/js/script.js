@@ -1,4 +1,5 @@
 const { createApp } = Vue
+const { createPicker } = picmo;
 
 createApp({
     data() {
@@ -307,6 +308,12 @@ createApp({
             dropdownDots.classList.toggle('show_drop-down')
         },
 
+        // mostro/nascondo gli emoji
+        emojiDropdown() {
+            let emojiDrop = document.querySelector('.pickerContainer')
+            emojiDrop.classList.toggle('show_drop-down')
+        },
+
         // cancellare il tutto il contatto
         eraseContact() {
             this.contacts.splice(this.profileActive, 1)
@@ -358,5 +365,17 @@ createApp({
             let container = document.querySelector(".chat-scroll");
             container.scrollTop = container.scrollHeight
         },
+    },
+    mounted() {
+        const container = document.querySelector('.pickerContainer');
+
+        const picker = createPicker({
+            rootElement: container
+        })
+
+        picker.addEventListener('emoji:select', event => {
+            console.log('Emoji selected:', event.emoji);
+            this.messageEnter += event.emoji
+        });
     },
 }).mount('#app')

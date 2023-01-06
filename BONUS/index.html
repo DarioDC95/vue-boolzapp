@@ -153,7 +153,10 @@
                             <!-- fondo della pagina -->
                             <div class="card-footer w-100 px-4 d-flex align-items-center border-0 back-ground_pink">
                                 <div class="emoji color-grey fs-4">
-                                    <i class="fa-regular fa-face-smile"></i>
+                                    <div @click="emojiDropdown()">
+                                        <i class="fa-regular fa-face-smile"></i>
+                                    </div>
+                                    <div class="pickerContainer"></div>
                                 </div>
                                 <div class="message-bar mx-4">
                                     <input v-model="messageEnter" @keyup.enter="enterMessage()" type="text" class="input-message py-2 px-3 w-100" placeholder="Scrivi un messaggio">
@@ -175,6 +178,8 @@
     </div>
     <!-- EMOJI PICMO -->
     <script src="https://unpkg.com/picmo@latest/dist/umd/index.js"></script>
+    <script src="https://unpkg.com/@picmo/popup-picker@latest/dist/umd/index.js"></script>
+    <script src="https://unpkg.com/@picmo/renderer-twemoji@latest/dist/umd/index.js"></script>
     <!-- LUXON JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.1/luxon.min.js" integrity="sha512-hZKz8wkgOcWeZanRioE6H6AC3OJspzJQyDBB5jLoZ1jIKbYDt5MwVIvU703WwE4sjvKZw9uNmmYlt29xKS27RA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- VUE JS -->

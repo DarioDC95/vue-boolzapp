@@ -171,6 +171,22 @@ main {
     flex-grow: 1;
 }
 
+.emoji {
+    position: relative;
+    cursor: pointer;
+}
+
+.pickerContainer {
+    position: absolute;
+    bottom: 100%;
+    display: none;
+}
+
+.pickerContainer.show_drop-down {
+    display: block;
+    z-index: 10;
+}
+
 .input-message {
     --webkit-appearance-: none;
     border: none;
